@@ -1,0 +1,29 @@
+{
+  "name": "graduation-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "watch": "nodemon ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "gh-pages": "^6.3.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoos": "^0.0.1-security",
+    "mongoose": "^8.10.2",
+    "nodemailer": "^6.10.0",
+    "homepage":"http://ZeinabKhaled-22.github.io/brain-tumor"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
