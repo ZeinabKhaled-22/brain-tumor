@@ -45,6 +45,8 @@ const userSchema = new Schema(
       default: status.PENDING
 
     },
+    otp:Number,
+    expireDateOtp:Date,
   },
   { timestamps: true }
 );

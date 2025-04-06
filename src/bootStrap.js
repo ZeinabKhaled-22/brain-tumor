@@ -1,5 +1,5 @@
 import { globalErrorHandling } from "./middleware/asyncHandler.js"
-import authRouter from "./modules/auth/auth.router.js"
+import { authRouter, userRouter } from "./modules/index.js"
 
 
 export const bootStrap = (app, express) => {
@@ -7,11 +7,12 @@ export const bootStrap = (app, express) => {
     app.use(express.json())
 
     // routing
-    app.use('/auth',authRouter)
+    app.use('/auth', authRouter)
+    app.use('/user', userRouter)
 
     // globalErrorHandling
-    app.all("*",(req,res,next)=>{
-        return res.json({message:"invalid url"})
-    })
+    app.all("*", (req, res, next) => {
+        return res.json({ message: "invalid url" })
+    })
     app.use(globalErrorHandling)
 }
