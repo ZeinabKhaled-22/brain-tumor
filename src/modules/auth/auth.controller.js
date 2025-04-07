@@ -5,6 +5,7 @@ import { messages } from "../../utilies/constant/messages.js"
 import { generateToken, verifyToken } from '../../utilies/token.js'
 import { sendEmail } from '../../utilies/sendEmail.js'
 import { status } from '../../utilies/constant/enums.js'
+import { generateOTP } from '../../utilies/otp.js'
 
 // signup
 export const signup = async (req,res,next) => {
