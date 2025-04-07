@@ -22,3 +22,10 @@ export const loginVal = joi.object({
   email: generalFields.email,
   password: generalFields.password.required(),
 });
+
+
+//forget password
+export const forgetpassVal = joi.object({
+    // otp:generalFields.string
+    email: generalFields.email,
+})

@@ -1,9 +1,9 @@
 // import module
 import { Router } from "express";
 import { isValid } from "../../middleware/validation.js";
-import { signupVal } from "./auth.validation.js";
+import { forgetpassVal, signupVal } from "./auth.validation.js";
 import { asyncHandler } from "../../middleware/asyncHandler.js";
-import { signup, verifyAccount, login } from "./auth.controller.js";
+import { signup, verifyAccount, login, forgetPassword, changePassword } from "./auth.controller.js";
 import { loginVal } from "./auth.validation.js";
 import { isAuthenticated } from "../../middleware/authentication.js";
 import { isAuthorized } from "../../middleware/authorization.js";
@@ -35,5 +35,11 @@ authRouter.delete(
   isAuthorized([]),
   // asyncHandler(deleteAccount)
 );
+
+// forget password
+authRouter.post('/forget',isValid(forgetpassVal),asyncHandler(forgetPassword))
+
+// change password
+authRouter.put('/change-password', asyncHandler(changePassword))
 
 export default authRouter;
