@@ -10,7 +10,7 @@ export const sendEmail =async ({ to, subject, html }) => {
     })
     await transpoter.sendMail({
         to,
-        from: "'<Graduation project>'zezekhaled@gmail.com",
+        from: "'<Brain Tumor>'zezekhaled@gmail.com",
         subject,
         html
     })
