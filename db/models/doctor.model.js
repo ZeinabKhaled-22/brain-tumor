@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
 
 // schema
-const doctorSchema = new Schema({
+const doctorSchema = new Schema([{
     fullName: {
         type: String,
         required: true,
@@ -37,6 +37,6 @@ const doctorSchema = new Schema({
         required: true,
         trim: true
     }]
-})
+}])
 // model
 export const Doctor = model('Doctor', doctorSchema)
