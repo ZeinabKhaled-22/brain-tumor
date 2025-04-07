@@ -10,7 +10,7 @@ import { isAuthenticated } from "../../middleware/authentication.js";
 const userRouter= Router()
 
 // reset passsword
-userRouter.put('/reset-password', isAuthenticated(), asyncHandler(resetPassword))
+userRouter.put('/reset', isAuthenticated(), asyncHandler(resetPassword))
 
 // forget password
 userRouter.post('/forget',isValid(forgetpassVal),asyncHandler(forgetPassword))
