@@ -17,6 +17,6 @@ const doctorRouter = Router()
 //        asyncHandler(getAllDoctor)
 //     )
 
-doctorRouter.post('/read-file',fileUploads().single('file'), asyncHandler(extractData))
+doctorRouter.post('/read-file',fileUploads({folder: "doctor's-data"}).single('file'), asyncHandler(extractData))
 
 export default doctorRouter
