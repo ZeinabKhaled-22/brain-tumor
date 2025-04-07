@@ -3,7 +3,7 @@ import path from 'path'
 import fs from 'fs'
 
 // delete file
-export const deleteFile = (fullPath) => {
-    const fullPath = path.resolve(fullPath)
+export const deleteFile = (filePath) => {
+    const fullPath = path.resolve(filePath)
     fs.unlinkSync(fullPath)
 }
