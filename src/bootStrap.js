@@ -12,7 +12,7 @@ export const bootStrap = (app, express) => {
     app.use('/doctor', doctorRouter)
 
     // globalErrorHandling
-    app.all("*", (req, res, next) => {
+    app.all("/", (req, res, next) => {
         return res.json({ message: "invalid url" })
     })
     app.use(globalErrorHandling)
