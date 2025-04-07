@@ -16,8 +16,8 @@ export const forgetPassword = async (req, res, next) => {
     if (!user) {
         return next(new AppError(messages.user.notFound, 404))
     }
-     //if already has email
-     if (user.otp && user.expireDateOtp > Date.now()) {
+    //if already has email
+    if (user.otp && user.expireDateOtp > Date.now()) {
         return next(new AppError('user already has otp', 400))
     }
     //generate otp
@@ -70,6 +70,6 @@ export const changePassword = async (req,res,next) => {
 
 
 //reset password
-export const resetPassword = async (req, res, next) => {
+//export const resetPassword = async (req, res, next) => {
     
-}
+//}
