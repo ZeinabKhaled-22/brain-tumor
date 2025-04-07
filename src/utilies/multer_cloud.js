@@ -4,7 +4,7 @@ import { AppError } from './appError.js';
 import { fileValidation } from "./multer.js";
 
 // fileUpload
-export const cloudUploads = ({ allowType = fileValidation.image} = {}) => {
+export const cloudUploads = ({ allowType = fileValidation.file} = {}) => {
     const storage = diskStorage({})
 
     const fileFilter = (req, file, cb) => {
