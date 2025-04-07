@@ -11,7 +11,7 @@ const doctorRouter = Router()
 doctorRouter.get(
     '/getAllDoctor',
      isAuthenticated(),
-      cloudUploads().array(['file']),
+      cloudUploads().single('file'),
        asyncHandler()
     )
 
