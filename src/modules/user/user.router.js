@@ -13,5 +13,5 @@ const userRouter= Router()
 userRouter.post('/forget',isValid(forgetpassVal),asyncHandler(forgetPassword))
 
 // reset password
-userRouter.put('/reset', isAuthenticated(), asyncHandler(resetPassword))
+userRouter.put('/changePassword', isAuthenticated(), asyncHandler(resetPassword))
 export default userRouter

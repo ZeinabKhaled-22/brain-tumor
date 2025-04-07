@@ -15,15 +15,17 @@ export const forgetPassword = async (req, res, next) => {
     const user = await User.findOne({ email });
     if (!user) {
         return next(new AppError(messages.user.notFound, 404))
-        //if already has email
-        if (user.otp && user.expireDateOtp > Date.now()) {
-            return next(new AppError('user already has otp', 400))
-        }
+    }
+     //if already has email
+     if (user.otp && user.expireDateOtp > Date.now()) {
+        return next(new AppError('user already has otp', 400))
     }
     //generate otp
     const otp = generateOTP()
+    // update user otp
     user.otp = otp;
     user.expireDateOtp = Date.now() + 15 * 60 * 1000; // OTP valid for 15 minutes
+    // save to db
     await user.save();
     //send email
     await sendEmail({ to: email, subject: "forget password", html: `<h1>u request forget password your otp is ${otp} </h1>` });
@@ -31,9 +33,8 @@ export const forgetPassword = async (req, res, next) => {
     return res.status(200).json({ message: 'OTP sent to email' });
 }
 
-
-//reset password
-export const resetPassword = async (req, res, next) => {
+// change password
+export const changePassword = async (req,res,next) => {
     // get data from req
     const { otp, newPassword } = req.body
     //check email
@@ -56,8 +57,8 @@ export const resetPassword = async (req, res, next) => {
     }
     ///hash new pass
     const hashedPassword = bcrypt.hashSync(newPassword, 8)
-    //user.password=hashedPassword
-    //user.otp=undefined
+    // user.password=hashedPassword
+    // user.otp=undefined
     // user.expireDateOtp=undefined
     // save db
     await user.save()
@@ -65,4 +66,10 @@ export const resetPassword = async (req, res, next) => {
     await User.updateOne({ _id: user._id }, { password: hashedPassword, $unset: { otp: "", expireDateOtp: "" } })
     // send response 
     return res.status(200).json({ message: "pass updated successfully", success: true })
+}
+
+
+//reset password
+export const resetPassword = async (req, res, next) => {
+    
 }
