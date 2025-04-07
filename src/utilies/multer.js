@@ -14,8 +14,6 @@ export const fileValidation = {
 export const fileUploads = ({folder, allowType = fileValidation.file}) => {
     const storage = diskStorage({
         destination: (req, file, cb) => {
-            console.log(file);
-            
             const fullPath = path.resolve(`uploads/${folder}`)
             if (!fs.existsSync(fullPath)) {
                 return fs.mkdirSync(fullPath, { recursive: true })
