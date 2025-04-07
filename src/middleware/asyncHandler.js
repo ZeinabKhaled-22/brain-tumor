@@ -1,4 +1,6 @@
 import { AppError } from "../utilies/appError.js"
+import { deleteCloudFile } from "../utilies/cloud.js"
+import { deleteFile } from "../utilies/file.js"
 
 export const asyncHandler = (fn) => {
     return (req,res,next) => {
@@ -9,6 +11,14 @@ export const asyncHandler = (fn) => {
 
 // global error handling
 export const globalErrorHandling = (err, req, res, next) => {
+    // rollback file system
+    if(req.file){
+        deleteFile(req.file.path)
+    }
+    // rollback of cloud
+    if(req.failFile){
+        deleteCloudFile(req.failFile.public_id)
+    }
     return res.status(err.statusCode || 500).json({ message: err.message, success: false })
 
 }

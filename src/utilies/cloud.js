@@ -13,4 +13,6 @@ cloudinary.config({
 })
 export default cloudinary
 
-
+export const deleteCloudFile = (public_id) => {
+    await cloudinary.uploader.destroy(public_id)
+}
