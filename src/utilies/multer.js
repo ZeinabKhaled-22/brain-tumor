@@ -7,7 +7,7 @@ import { AppError } from './appError.js';
 
 // file validation
 export const fileValidation = {
-    file: ['application/ms-excel']
+    file: ['application/msexcel']
 }
 
 // fileUpload
