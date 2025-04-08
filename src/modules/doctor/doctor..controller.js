@@ -17,7 +17,7 @@ import XLSX from "xlsx";
 // read file
 export const extractData = async (req, res, next) => {
   const file = req.file;
-  const filePath = file?.path;
+  const filePath = file.path;
   const workbook = XLSX.readFile(filePath);
   const sheetName = workbook.SheetNames[0];
   const worksheet = workbook.Sheets[sheetName];
