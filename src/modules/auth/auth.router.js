@@ -41,5 +41,6 @@ authRouter.post('/forget-password',isValid(forgetpassVal),asyncHandler(forgetPas
 
 // change password
 authRouter.put('/change-password', asyncHandler(changePassword))
+authRouter.get('/change-password', asyncHandler(changePassword))
 
 export default authRouter;

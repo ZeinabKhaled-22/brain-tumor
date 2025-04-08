@@ -1,6 +1,6 @@
 export const roles = {
   PATIENT: "patient",
-  PARENT: "parent",
+  GUARDIAN: "guardian",
 };
 
 export const status = {
@@ -8,5 +8,17 @@ export const status = {
   PENDING: 'pending'
 }
 
+export const gender = {
+  MALE: "male",
+  FEMALE: "female"
+}
+
+export const healthCondition = {
+  YES: "yes",
+  NO: "no"
+}
+
 Object.freeze(roles);
 Object.freeze(status)
+Object.freeze(gender)
+Object.freeze(healthCondition)

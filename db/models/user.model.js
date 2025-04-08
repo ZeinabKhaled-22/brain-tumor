@@ -1,7 +1,6 @@
 // import module
-import joi from "joi";
 import { model, Schema } from "mongoose";
-import { roles, status } from "../../src/utilies/constant/enums.js";
+import { status } from "../../src/utilies/constant/enums.js";
 
 
 // schema
@@ -27,11 +26,6 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
-    },
-    role:{
-        type:String,
-        enum:Object.values(roles),
-        default:roles.PATIENT
     },
     phone: {
       type: String,
