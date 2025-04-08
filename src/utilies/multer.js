@@ -7,7 +7,7 @@ import { AppError } from './appError.js';
 
 // file validation
 export const fileValidation = {
-    file: ['application/vnd.ms-excel']
+    file: ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']
 }
 
 // fileUpload
