@@ -10,13 +10,8 @@ import { fileUploads } from "../../utilies/multer.js";
 const doctorRouter = Router()
 
 // get all doctor
-// doctorRouter.get(
-//     '/getAllDoctor',
-//      isAuthenticated(),
-//       cloudUploads().single('file'),
-//        asyncHandler(getAllDoctor)
-//     )
+doctorRouter.get('/getAllDoctor',asyncHandler(getAllDoctor))
 
-doctorRouter.post('/read-file',fileUploads({folder: "doctor's-data"}).single('file'), asyncHandler(extractData))
+//doctorRouter.post('/read-file',fileUploads({folder: "doctor's-data"}).single('file'), asyncHandler(extractData))
 
 export default doctorRouter
