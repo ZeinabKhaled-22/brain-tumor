@@ -6,12 +6,12 @@ import { nanoid } from 'nanoid';
 import { AppError } from './appError.js';
 
 // file validation
-export const fileValidation = {
-    file: ['application/ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']
-}
+// export const fileValidation = {
+//     file: ['application/ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']
+// }
 
 // fileUpload
-export const fileUploads = ({folder, allowType = fileValidation.file}) => {
+export const fileUploads = ({folder, allowType = {}}) => {
     const storage = diskStorage({
         destination: (req, file, cb) => {
             const fullPath = path.resolve(`uploads/${folder}`)
