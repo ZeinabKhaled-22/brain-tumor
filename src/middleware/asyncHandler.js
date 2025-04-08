@@ -13,7 +13,7 @@ export const asyncHandler = (fn) => {
 export const globalErrorHandling = (err, req, res, next) => {
     // rollback file system
     if(req.file){
-        deleteFile(req.file.path)
+        deleteFile(req.file?.path)
     }
     // rollback of cloud
     if(req.failFile){
