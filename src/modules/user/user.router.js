@@ -8,7 +8,7 @@ import { isAuthenticated } from "../../middleware/authentication.js";
 const userRouter= Router()
 
 // reset passsword
-userRouter.put('/reset', isAuthenticated(), asyncHandler(resetPassword))
+userRouter.put('/reset-passwprd', isAuthenticated(), asyncHandler(resetPassword))
 
 
 
