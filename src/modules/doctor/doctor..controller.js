@@ -20,6 +20,8 @@ export const extractData = async (req, res, next) => {
   console.log(file);
   
   const filePath = file.path;
+  console.log(filePath);
+  
   const workbook = XLSX.readFile(filePath);
   const sheetName = workbook.SheetNames[0];
   const worksheet = workbook.Sheets[sheetName];
