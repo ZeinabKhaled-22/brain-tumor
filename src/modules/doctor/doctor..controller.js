@@ -1,5 +1,5 @@
-import XLSX from "xlsx";
-// import { Doctor } from "../../../db/index.js"
+//import XLSX from "xlsx";
+ import { Doctor } from "../../../db/index.js"
 // import cloudinary from "../../utilies/cloud.js"
 
 //get all doctor
