@@ -1,7 +1,6 @@
 // import module
 import multer, { diskStorage } from "multer";
 import { AppError } from './appError.js';
-import { fileValidation } from "./multer.js";
 
 // fileUpload
 export const cloudUploads = ({ allowType = fileValidation.file} = {}) => {
