@@ -14,7 +14,8 @@ const userDataSchema = new Schema({
     dateOfBirth: Date,
     bodyMeasurement: {
         height: Number,
-        width: Number
+        width: Number,
+        finalResult: Number
     },
     healthCondition: {
         type: String,
