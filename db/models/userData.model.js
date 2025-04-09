@@ -5,26 +5,26 @@ import { gender, healthCondition, roles } from "../../src/utilies/constant/enums
 const userDataSchema = new Schema({
     role: {
         type: String,
-        required: true,
+        // required: true,
         enum: Object.values(roles)
     },
     gender: {
         type: String,
-        required: true,
+        // required: true,
         enum: Object.values(gender)
     },
     dateOfBirth: {
         type: Date,
-        required: true
+        // required: true
     },
     bodyMeasurement: {
         type: Number,
-        required: true
+        // required: true
 
     },
     healthCondition: {
         type: String,
-        required: true,
+        // required: true,
         enum: Object.values(healthCondition)
     },
     user: {
