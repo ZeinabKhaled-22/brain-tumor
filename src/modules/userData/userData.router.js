@@ -8,6 +8,6 @@ import { addUserData } from "./userData.controller.js";
 const userDataRouter = Router()
 
 // add userData
-userDataRouter.post('/addData',isValid(addUserDataVal), asyncHandler(addUserData) )
+userDataRouter.post('/add-data',isValid(addUserDataVal), asyncHandler(addUserData) )
 
 export default userDataRouter
