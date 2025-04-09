@@ -27,10 +27,10 @@ export const resetPassword = async (req, res, next) => {
     // hash new password
     const hashedPassword = bcrypt.hashSync(newPassword, 8)
     // compare new password
-    const newMatch = bcrypt.compareSync(newPassword,confirmPassword )
-    if(!newMatch){
-        return next(new AppError(messages.user.invalidCredentials, 401))
-    }
+    // const newMatch = bcrypt.compareSync(newPassword,confirmPassword )
+    // if(!newMatch){
+    //     return next(new AppError(messages.user.invalidCredentials, 401))
+    // }
     //  hashPassword({password: newPassword})
     // update user
     await User.updateOne({_id: userId}, {password: hashedPassword})
