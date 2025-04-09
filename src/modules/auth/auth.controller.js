@@ -136,11 +136,11 @@ export const changePassword = async (req,res,next) => {
     }
     ///hash new pass
     const hashedPassword = bcrypt.hashSync(newPassword, 8)
-     // compare password
-     const match = bcrypt.compareSync(newPassword, confirmPassword)
-     if(!match){
-         return next(new AppError(messages.user.invalidCredentials, 400))
-     }
+    //  // compare password
+    //  const match = bcrypt.compareSync(newPassword, req.authUser.password)
+    //  if(!match){
+    //      return next(new AppError(messages.user.invalidCredentials, 400))
+    //  }
     // user.password=hashedPassword
     // user.otp=undefined
     // user.expireDateOtp=undefined
