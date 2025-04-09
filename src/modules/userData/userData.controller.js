@@ -10,7 +10,11 @@ export const addUserData = async (req, res, next) => {
         dateOfBirth,
         bodyMeasurement,
         healthCondition,
-        user, country } = req.body
+        user,
+        country,
+        height,
+        width
+    } = req.body
     // check user existence
     const userExist = await User.findById(user)// null, {}
     if (!userExist) {
@@ -24,7 +28,9 @@ export const addUserData = async (req, res, next) => {
         bodyMeasurement,
         healthCondition,
         user,
-        country
+        country,
+        height,
+        width
     })
     // save db
     const createdUserData = await userData.save() //{}, null
