@@ -38,6 +38,10 @@ export const addUserData = async (req, res, next) => {
         return next(new AppError(messages.userData.failToCreate, 500))
     }
     // send response
-    return res.status(201).json({ message: messages.userData.createdSuccessfully, success: true })
+    return res.status(201).json({
+         message: messages.userData.createdSuccessfully,
+          success: true,
+          data: createdUserData
+         })
 
 }
