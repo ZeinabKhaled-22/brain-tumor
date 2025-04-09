@@ -24,11 +24,6 @@ export const generalFields = {
   bodyMeasurement:  joi.number(),
   height: joi.number(),
   width: joi.number(),
-  // {
-  //   height: joi.number(),
-  //   width: joi.number(),
-  //   finalResult: joi.number()
-  // },
   healthCondition: joi.string(),
   newPassword:  joi
   .string()
