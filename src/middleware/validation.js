@@ -20,7 +20,7 @@ export const generalFields = {
   role: joi.string(),
   gender: joi.string(),
   dateOfBirth: joi.date(),
-  bodyMeasurement: joi.number(),
+  bodyMeasurement: joi.object().number(),
   healthCondition: joi.string(),
   newPassword:  joi
   .string()
