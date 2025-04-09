@@ -16,7 +16,13 @@ export const generalFields = {
     ),
   confirmPassword: joi.string().valid(joi.ref("password")),
   dateOfBirth: joi.date(),
-  objectId : joi.string().hex().length(24),
+  objectId: joi.string().hex().length(24),
+  role: joi.string(),
+  gender: joi.string(),
+  dateOfBirth: joi.date(),
+  bodyMeasurement: joi.number(),
+  healthCondition: joi.string(),
+
 };
 
 // validation
