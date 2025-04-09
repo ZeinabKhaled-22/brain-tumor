@@ -1,6 +1,6 @@
 // import module
 import joi from 'joi'
-import { generalFields } from '../../middleware/validation'
+import { generalFields } from '../../middleware/validation.js'
 
 
 // add userData
