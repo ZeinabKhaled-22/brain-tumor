@@ -15,4 +15,5 @@ export const messages = {
     verified: "user verify successfully ",
     invalidCredentials: " invalid credentials",
   },
+  userData: generateMessages('userData')
 };

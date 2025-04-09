@@ -18,7 +18,7 @@ const userDataSchema = new Schema({
         required: true
     },
     bodyMeasurement: {
-        // type: Doub
+        type: Double,
         required: true
 
     },
@@ -35,4 +35,4 @@ const userDataSchema = new Schema({
 
 })
 // model
-export const userData = model('userData', userDataSchema)
+export const UserData = model('UserData', userDataSchema)
