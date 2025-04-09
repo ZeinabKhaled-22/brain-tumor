@@ -1,6 +1,19 @@
 import joi from "joi";
 import { AppError } from "../utilies/appError.js";
 
+// parse array
+const parseArray = (value, helper) => {
+  let data = JSON.parse(value)
+  let schema = joi.array().items(joi.string())
+  const { error } = schema.validate(data)
+  if(error){
+      return helper(error.details)
+  }
+  return true
+}
+
+
+
 // general feilds
 export const generalFields = {
   firstName: joi.string(),
@@ -20,11 +33,12 @@ export const generalFields = {
   role: joi.string(),
   gender: joi.string(),
   dateOfBirth: joi.date(),
-  bodyMeasurement: {
-    height: joi.number(),
-    width: joi.number(),
-    finalResult: joi.number()
-  },
+  bodyMeasurement:  joi.custom(parseArray),
+  // {
+  //   height: joi.number(),
+  //   width: joi.number(),
+  //   finalResult: joi.number()
+  // },
   healthCondition: joi.string(),
   newPassword:  joi
   .string()

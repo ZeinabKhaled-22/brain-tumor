@@ -12,18 +12,19 @@ const userDataSchema = new Schema({
         enum: Object.values(gender)
     },
     dateOfBirth: Date,
-     bodyMeasurement:{
-         type: {
-        height: { type: Number, required: true },
-        width: { type: Number, required: true },
-        finalresult: { type: Number, required: true },
-      }
-    },
-    //[{
-    //     height: Number,
-    //     width: Number,
-    //     finalResult: Number
-    // }],
+      bodyMeasurement:
+      [{
+        height: Number,
+        width: Number,
+        finalResult: Number
+    }],
+      //{
+    //      type: {
+    //     height: { type: Number, required: true },
+    //     width: { type: Number, required: true },
+    //     finalresult: { type: Number, required: true },
+    //   }
+    // },
     healthCondition: {
         type: String,
         enum: Object.values(healthCondition)
