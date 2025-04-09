@@ -10,5 +10,6 @@ export const addUserDataVal = joi.object({
         dateOfBirth: generalFields.dateOfBirth.required(),
         bodyMeasurement: generalFields.bodyMeasurement.required(),
         healthCondition: generalFields.healthCondition.required(),
-        user: generalFields.objectId.required()
+        user: generalFields.objectId.required(),
+        country: generalFields.country.required()
 })

@@ -20,7 +20,8 @@ const userDataSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: "User"
-    }
+    },
+    country: String
 
 })
 // model
