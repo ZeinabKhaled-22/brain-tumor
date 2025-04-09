@@ -1,5 +1,5 @@
 import { User, UserData } from "../../../db/index.js"
-import { AppError } from "../../utilies/appError"
+import { AppError } from "../../utilies/appError.js"
 import { messages } from "../../utilies/constant/messages.js"
 
 // add userDara
