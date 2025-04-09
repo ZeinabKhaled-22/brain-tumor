@@ -18,7 +18,7 @@ const userDataSchema = new Schema({
         required: true
     },
     bodyMeasurement: {
-        type: Double,
+        type: Number,
         required: true
 
     },

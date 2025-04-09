@@ -1,4 +1,5 @@
-const { Router } = require("express");
+// import module
+import { Router } from "express";
 
 const userDataRouter = Router()
 
