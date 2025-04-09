@@ -115,7 +115,7 @@ export const forgetPassword = async (req, res, next) => {
 // change password
 export const changePassword = async (req,res,next) => {
     // get data from req
-    const { otp, newPassword } = req.body
+    const { otp, newPassword, confirmPassword } = req.body
     //check email
     //const user=await User.findOne({email})
     // Find user by OTP
@@ -136,6 +136,11 @@ export const changePassword = async (req,res,next) => {
     }
     ///hash new pass
     const hashedPassword = bcrypt.hashSync(newPassword, 8)
+     // compare password
+     const match = bcrypt.compareSync(newPassword, confirmPassword)
+     if(!match){
+         return next(new AppError(messages.user.invalidCredentials, 400))
+     }
     // user.password=hashedPassword
     // user.otp=undefined
     // user.expireDateOtp=undefined

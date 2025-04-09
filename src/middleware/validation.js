@@ -22,6 +22,13 @@ export const generalFields = {
   dateOfBirth: joi.date(),
   bodyMeasurement: joi.number(),
   healthCondition: joi.string(),
+  newPassword:  joi
+  .string()
+  .pattern(
+    new RegExp(
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*_]).{8,}$/
+    )
+  ),
 
 };
 
