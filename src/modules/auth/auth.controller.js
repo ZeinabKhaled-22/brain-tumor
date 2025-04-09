@@ -144,5 +144,5 @@ export const changePassword = async (req,res,next) => {
     // update password
     await User.updateOne({ _id: user._id }, { password: hashedPassword, $unset: { otp: "", expireDateOtp: "" } })
     // send response 
-    return res.status(200).json({ message: "pass updated successfully", success: true })
+    return res.status(200).json({ message: "password updated successfully", success: true })
 }

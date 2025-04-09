@@ -1,13 +1,12 @@
 import { User } from "../../db/index.js";
 import {AppError} from "../utilies/appError.js"
-import {roles} from "../utilies/constant/enums.js"
+import {roles, status} from "../utilies/constant/enums.js"
 import {messages} from "../utilies/constant/messages.js"
 import { verifyToken}from "../utilies/token.js"
 
 
 export const isAuthenticated = () => {
   return async (req, res, next) => {
-    token;
     const { token } = req.headers;
     // decoded token
     const payload = verifyToken({ token });

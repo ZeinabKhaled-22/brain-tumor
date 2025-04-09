@@ -40,7 +40,6 @@ authRouter.delete(
 authRouter.post('/forget-password',isValid(forgetpassVal),asyncHandler(forgetPassword))
 
 // change password
-authRouter.put('/change-password', asyncHandler(changePassword))
-authRouter.get('/change-password', asyncHandler(changePassword))
+authRouter.put('/change-password',asyncHandler(changePassword))
 
 export default authRouter;

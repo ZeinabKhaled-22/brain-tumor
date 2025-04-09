@@ -10,8 +10,13 @@ import { generateOTP } from "../../utilies/otp.js"
 //reset password
 export const resetPassword = async (req, res, next) => {
     // get data from req
-    const { oldPassword, newPassword } = req.body
+    const { email, oldPassword, newPassword } = req.body
     const userId = req.authUser._id
+    // check user existence
+    const userExist = await User.findOne({ email })
+    if(!userExist){
+        return next(new AppError(messages.user.notFound, 400))
+    }
     // check user password
     const match = bcrypt.compareSync(oldPassword,req.authUser.password )
     // compareSync({password: oldPassword, hashPassword:req.authUser.password })

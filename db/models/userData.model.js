@@ -18,6 +18,7 @@ const userDataSchema = new Schema({
         required: true
     },
     bodyMeasurement: {
+        // type: Doub
         required: true
 
     },
@@ -25,7 +26,12 @@ const userDataSchema = new Schema({
         type: String,
         required: true,
         enum: Object.values(healthCondition)
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
     }
+
 
 })
 // model
