@@ -4,7 +4,7 @@ import { AppError } from "../utilies/appError.js";
 // parse array
 const parseArray = (value, helper) => {
   let data = JSON.parse(value)
-  let schema = joi.array().items(joi.string())
+  let schema = joi.array().items(joi.number())
   const { error } = schema.validate(data)
   if(error){
       return helper(error.details)
