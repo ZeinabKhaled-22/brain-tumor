@@ -20,7 +20,11 @@ export const generalFields = {
   role: joi.string(),
   gender: joi.string(),
   dateOfBirth: joi.date(),
-  bodyMeasurement: joi.object().number(),
+  bodyMeasurement: {
+    height: joi.number(),
+    width: joi.number(),
+    finalResult: joi.number()
+  },
   healthCondition: joi.string(),
   newPassword:  joi
   .string()
