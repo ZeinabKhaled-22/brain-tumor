@@ -78,19 +78,10 @@ export const login = async (req, res, next) => {
     }
     // generate token
     const token = generateToken({ payload: { _id: userExist._id, email } })
-    // prepare data
-    const user = await User({
-        email,
-        phone,
-        password
-    })
-    // save to db
-    const createdUser = await user.save()
     // send response
     return res.status(200).json({
         message: 'login successfully',
         success: true,
-        data: createdUser,
         token
     })
 }
