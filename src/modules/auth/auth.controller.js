@@ -8,12 +8,12 @@ import { status } from '../../utilies/constant/enums.js'
 import { generateOTP } from '../../utilies/otp.js'
 
 // signup
-export const signup = async (req,res,next) => {
+export const signup = async (req, res, next) => {
     // get data from req
     let { firstName, lastName, phone, email, password } = req.body
     // check existence
     const userExist = await User.findOne({ email })// {}, null
-    if(userExist){
+    if (userExist) {
         return next(new AppError(messages.user.alreadyExist, 409))
     }
     // hash password
@@ -28,7 +28,7 @@ export const signup = async (req,res,next) => {
     })
     // save in db
     const createdUser = await user.save() //{}, null
-    if(!createdUser){
+    if (!createdUser) {
         return next(new AppError(messages.user.failToCreate, 500))
     }
     // generate token
@@ -41,20 +41,20 @@ export const signup = async (req,res,next) => {
     })
     // send response
     return res.status(201).json({
-        message: messages.user.createdSuccessfully, 
+        message: messages.user.createdSuccessfully,
         success: true,
         data: createdUser
     })
 }
 
 // verify token
-export const verifyAccount = async (req,res,next) => {
+export const verifyAccount = async (req, res, next) => {
     // get data from req
     const { token } = req.params
     // decoded token
     const payload = verifyToken({ token })
     // update user
-    await User.findOneAndUpdate({ email: payload, status: status.PENDING}, { status: status.VERIFIED })
+    await User.findOneAndUpdate({ email: payload, status: status.PENDING }, { status: status.VERIFIED })
     // send response
     return res.status(200).json({
         message: messages.user.verified,
@@ -63,26 +63,34 @@ export const verifyAccount = async (req,res,next) => {
 }
 
 // login
-export const login = async (req,res,next) => {
+export const login = async (req, res, next) => {
     // get data from req
     const { phone, email, password } = req.body
     // check existence
-    const userExist = await User.findOne({ $or: [{ email },{phone}], status: status.VERIFIED }) // {}, null
-    if(!userExist){
-        return next(new AppError(messages.user.invalidCredentials,400))
+    const userExist = await User.findOne({ $or: [{ email }, { phone }], status: status.VERIFIED }) // {}, null
+    if (!userExist) {
+        return next(new AppError(messages.user.invalidCredentials, 400))
     }
     // compare password
     const match = bcrypt.compareSync(password, userExist.password)
-    if(!match){
+    if (!match) {
         return next(new AppError(messages.user.invalidCredentials, 400))
     }
     // generate token
-    const token = generateToken({ payload: {_id: userExist._id, email} })
+    const token = generateToken({ payload: { _id: userExist._id, email } })
+    // prepare data
+    const user = await User({
+        email,
+        phone,
+        password
+    })
+    // save to db
+    const createdUser = await user.save()
     // send response
     return res.status(200).json({
         message: 'login successfully',
         success: true,
-        data: userExist,
+        data: createdUser,
         token
     })
 }
@@ -114,7 +122,7 @@ export const forgetPassword = async (req, res, next) => {
 }
 
 // change password
-export const changePassword = async (req,res,next) => {
+export const changePassword = async (req, res, next) => {
     // get data from req
     const { otp, newPassword, confirmPassword } = req.body
     //check email
