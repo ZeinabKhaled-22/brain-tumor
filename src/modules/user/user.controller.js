@@ -18,19 +18,19 @@ export const resetPassword = async (req, res, next) => {
     //     return next(new AppError(messages.user.notFound, 400))
     // }
     // check user password
-    const match = bcrypt.compareSync(oldPassword,req.authUser.password )
+    const match = bcrypt.compareSync(oldPassword, req.authUser.password)
     // compareSync({password: oldPassword, hashPassword:req.authUser.password })
     //  comparePassword({ password: oldPassword, hashPassword: req.authUser.password})
-    if(!match){
+    if (!match) {
         return next(new AppError(messages.user.invalidCredentials, 401))
     }
     // hash new password
     const hashedPassword = bcrypt.hashSync(newPassword, 8)
     //  hashPassword({password: newPassword})
     // update user
-    await User.updateOne({_id: userId}, {password: hashedPassword})
+    await User.updateOne({ _id: userId }, { password: hashedPassword })
     // return response
-    return res.status(200).json({message: messages.user.updatedSucessfully, success: true})   
+    return res.status(200).json({ message: messages.user.updatedSucessfully, success: true })
 }
 
 /**
@@ -42,5 +42,45 @@ export const resetPassword = async (req, res, next) => {
  * }
  */
 
+// update account
+export const updateAccount = async (req, res, next) => {
+    // get data from req
+    const { firstName, lastName, phone } = req.body
+    const { userId } = req.params
+    // check existense
+    const userExist = await User.findById(userId) //{}, null
+    if (!userExist) {
+        return next(new AppError(messages.user.notFound, 404))
+    }
+    // prepare data
+    userExist.firstName = firstName
+    userExist.lastName = lastName
+    userExist.phone = phone
+    // save to db
+    const updatedAccount = await userExist.save() //{},null
+    if (!updatedAccount) {
+        return next(new AppError(messages.user.failToUpdate, 500))
+    }
+    // send respone
+    return res.status(200).json({
+        message: messages.user.updatedSucessfully,
+        success: true,
+        data: updatedAccount
+    })
+}
+
+
+
+
+
+// delete account
+export const deleteAccount = async (req, res, next) => {
+    // get data from req
+    const { userId } = req.params
+    // delete account
+    const deletedAccount = await User.deleteOne({ _id: userId })
+    // send response
+    return res.status(200).json({ message: messages.user.deletedSuccessfully, success: true })
+}
 
 

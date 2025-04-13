@@ -20,22 +20,6 @@ authRouter.get("/verify/:token", asyncHandler(verifyAccount));
 // login
 authRouter.post("/login", isValid(loginVal), asyncHandler(login));
 
-// update account
-authRouter.put(
-  "/:userId",
-  isAuthenticated(),
-  isAuthorized([]),
-  // asyncHandler(updateAccount)
-);
-
-// delete account
-authRouter.delete(
-  "/:userId",
-  isAuthenticated(),
-  isAuthorized([]),
-  // asyncHandler(deleteAccount)
-);
-
 // forget password
 authRouter.post('/forget-password',isValid(forgetpassVal),asyncHandler(forgetPassword))
 
