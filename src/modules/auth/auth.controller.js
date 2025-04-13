@@ -115,7 +115,7 @@ export const forgetPassword = async (req, res, next) => {
 // change password
 export const changePassword = async (req, res, next) => {
     // get data from req
-    const { otp, newPassword, confirmPassword } = req.body
+    const { otp, newPassword,} = req.body
     //check email
     //const user=await User.findOne({email})
     // Find user by OTP
