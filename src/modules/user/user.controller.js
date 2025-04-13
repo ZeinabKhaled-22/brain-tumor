@@ -10,7 +10,7 @@ import { generateOTP } from "../../utilies/otp.js"
 //reset password
 export const resetPassword = async (req, res, next) => {
     // get data from req
-    const { oldPassword, newPassword, confirmPassword } = req.body
+    const { oldPassword, newPassword} = req.body
     const userId = req.authUser._id
     // check user existence
     // const userExist = await User.findOne({ email })
