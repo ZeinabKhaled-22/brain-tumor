@@ -55,7 +55,10 @@ export const updateAccount = async (req, res, next) => {
     // prepare data
     userExist.firstName = firstName
     userExist.lastName = lastName
-    userExist.phone = phone
+    if(!phone){
+        userExist.phone
+    }
+    // userExist.phone = phone
     // save to db
     const updatedAccount = await userExist.save() //{},null
     if (!updatedAccount) {
