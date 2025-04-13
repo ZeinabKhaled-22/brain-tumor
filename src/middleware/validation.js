@@ -32,7 +32,6 @@ export const generalFields = {
       /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*_]).{8,}$/
     )
   ),
-  confirm_password: joi.string().valid(joi.ref("newPassword")),
   country: joi.string()
 
 };
