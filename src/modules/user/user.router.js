@@ -3,6 +3,8 @@ import { Router } from "express";
 import { deleteAccount, resetPassword, updateAccount, } from "./user.controller.js";
 import { asyncHandler } from "../../middleware/asyncHandler.js";
 import { isAuthenticated } from "../../middleware/authentication.js";
+import { isValid } from "../../middleware/validation.js";
+import { resetPasswordVal } from "./user.validation.js";
 
 // router
 const userRouter= Router()
