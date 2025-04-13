@@ -4,5 +4,5 @@ import { generalFields } from '../../middleware/validation.js'
 
 // reset password
 export const resetPasswordVal = joi.object({
-  confirmPassword: generalFields.confirmPassword.required()
+  confirmPassword: generalFields.confirm_password.required()
 })
