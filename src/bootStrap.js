@@ -1,5 +1,5 @@
 import { globalErrorHandling } from "./middleware/asyncHandler.js"
-import { authRouter, doctorRouter, userDataRouter, userRouter } from "./modules/index.js"
+import { authRouter, doctorRouter, userDataRouter, userRouter, newsRouter } from "./modules/index.js"
 
 
 export const bootStrap = (app, express) => {
@@ -11,6 +11,7 @@ export const bootStrap = (app, express) => {
     app.use('/user', userRouter)
     app.use('/doctor', doctorRouter)
     app.use('/userData', userDataRouter)
+    app.use('/news', newsRouter)
 
     // globalErrorHandling
     app.all("/", (req, res, next) => {
