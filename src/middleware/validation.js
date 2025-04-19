@@ -25,13 +25,6 @@ export const generalFields = {
   height: joi.number(),
   width: joi.number(),
   healthCondition: joi.string(),
-  newPassword:  joi
-  .string()
-  .pattern(
-    new RegExp(
-      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*_]).{8,}$/
-    )
-  ),
   country: joi.string()
 
 };
