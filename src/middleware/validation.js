@@ -26,7 +26,15 @@ export const generalFields = {
   width: joi.number(),
   healthCondition: joi.string(),
   country: joi.string(),
-  otp: joi.string()
+  otp: joi.string(),
+  newPassword: joi
+  .string()
+  .pattern(
+    new RegExp(
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*_]).{8,}$/
+    )
+  ),
+  cPassword: joi.string().valid(joi.ref("newPassword"))
 
 };
 
