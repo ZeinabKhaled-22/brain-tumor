@@ -32,6 +32,8 @@ export const forgetpassVal = joi.object({
 
 // change password
 export const changePasswordVal = joi.object({
+  email: generalFields.email.required(),
+  otp: generalFields.otp.required(),
   newPassword: generalFields.password.required(),
   confirmPassword: generalFields.confirmPassword.required()
 })

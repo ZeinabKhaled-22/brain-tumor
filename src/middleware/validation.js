@@ -25,7 +25,8 @@ export const generalFields = {
   height: joi.number(),
   width: joi.number(),
   healthCondition: joi.string(),
-  country: joi.string()
+  country: joi.string(),
+  otp: joi.string()
 
 };
 
