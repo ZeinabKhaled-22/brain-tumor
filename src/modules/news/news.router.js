@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { isAuthenticated } from "../../middleware/authentication.js";
 import { asyncHandler } from "../../middleware/asyncHandler.js";
 import { getAllNews } from "./news.controller.js";
 
@@ -7,6 +6,6 @@ import { getAllNews } from "./news.controller.js";
 const newsRouter = Router()
 
 // get all news
-newsRouter.get('/getAllNews',isAuthenticated(),asyncHandler(getAllNews))
+newsRouter.get('/getAllNews',asyncHandler(getAllNews))
 
 export default newsRouter
