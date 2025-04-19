@@ -13,7 +13,7 @@ export const messages = {
   user: {
     ...generateMessages("user"),
     verified: "user verify successfully ",
-    invalidCredentials: " invalid credentials",
+    invalidCredentials: "invalid credentials",
   },
   userData: generateMessages('userData')
 };
