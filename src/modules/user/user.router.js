@@ -1,11 +1,11 @@
 // import module
 import { Router } from "express";
-import { deleteAccount, resetPassword, updateAccount, } from "./user.controller.js";
+import { deleteAccount, editProfile, resetPassword } from "./user.controller.js";
 import { asyncHandler } from "../../middleware/asyncHandler.js";
 import { isAuthenticated } from "../../middleware/authentication.js";
 import { cloudUploads } from "../../utilies/multer_cloud.js";
 import { isValid } from "../../middleware/validation.js";
-import { editProfile, editProfileVal } from "./user.validation.js";
+import { editProfileVal } from "./user.validation.js";
 
 // router
 const userRouter= Router()
