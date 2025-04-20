@@ -1,16 +1,16 @@
 // import module
 import { Router } from "express";
-import { deleteAccount, editProfile, resetPassword } from "./user.controller.js";
+import { changeEmail, deleteAccount, editProfile, resetPassword } from "./user.controller.js";
 import { asyncHandler } from "../../middleware/asyncHandler.js";
 import { isAuthenticated } from "../../middleware/authentication.js";
 import { cloudUploads } from "../../utilies/multer_cloud.js";
 import { isValid } from "../../middleware/validation.js";
-import { editProfileVal } from "./user.validation.js";
+import { changeEmailVal, editProfileVal } from "./user.validation.js";
 
 // router
 const userRouter = Router()
 
-// reset passsword
+// reset passsword  AC
 userRouter.put('/reset-password', isAuthenticated(), asyncHandler(resetPassword))
 
 // edit profile
@@ -23,6 +23,9 @@ userRouter.put("/:userId",
 
 // delete account
 userRouter.delete("/:userId", isAuthenticated(), asyncHandler(deleteAccount));
+
+// edit email
+userRouter.put('/:userId', isAuthenticated(),isValid(changeEmailVal), asyncHandler(changeEmail))
 
 
 

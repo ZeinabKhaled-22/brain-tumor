@@ -11,7 +11,7 @@ import cloudinary from "../../utilies/cloud.js"
 //reset password
 export const resetPassword = async (req, res, next) => {
     // get data from req
-    const { oldPassword, newPassword} = req.body
+    const { oldPassword, newPassword } = req.body
     const userId = req.authUser._id
     // check user existence
     // const userExist = await User.findOne({ email })
@@ -34,35 +34,27 @@ export const resetPassword = async (req, res, next) => {
     return res.status(200).json({ message: messages.user.updatedSucessfully, success: true })
 }
 
-/**
- * export const hashPassword = ({password = '', saltRound = 8}) => {
- * retrun bycrpt.hashsync(password, saltRound)
- * }
- * export cconst comparePassword = ({password = '', hashPassword = ''}) => {
- * retrun bycrpt.coparesync(password, hashPassword)
- * }
- */
 
 // edit profile
-export const editProfile = async (req,res,next) => {
+export const editProfile = async (req, res, next) => {
     // get data from req
     const { firstName, about } = req.body
     const { userId } = req.params
     //check user existence
     const userExist = await User.findById(userId) //{}, null
-    if(!userExist){
+    if (!userExist) {
         return next(new AppError(messages.user.notFound, 404))
     }
     //edit first name
-    if(firstName){
+    if (firstName) {
         return userExist.firstName = firstName
     }
     // edit about
-    if(about){
+    if (about) {
         return userExist.about = about
     }
     // edit image
-    if(req.file){
+    if (req.file) {
         const { secure_url, public_id } = await cloudinary.uploader.upload(req.file.path, {
             public_id: userExist.image.public_id
         })
@@ -71,22 +63,18 @@ export const editProfile = async (req,res,next) => {
     }
     // add to db
     const updatedProfile = await userExist.save() //{}, null
-    if(!updatedProfile){
+    if (!updatedProfile) {
         return next(new AppError(messages.user.failToUpdate, 500))
     }
     // send response
     return res.status(200).json({
-        message: messages.user.updatedSucessfully, 
+        message: messages.user.updatedSucessfully,
         success: true,
         data: updatedProfile
     })
 
 
 }
-
-
-
-
 
 
 // delete account
@@ -97,6 +85,40 @@ export const deleteAccount = async (req, res, next) => {
     const deletedAccount = await User.deleteOne({ _id: userId })
     // send response
     return res.status(200).json({ message: messages.user.deletedSuccessfully, success: true })
+}
+
+
+// change email
+export const changeEmail = async (req, res, next) => {
+    // get data from req
+    const { email } = req.body
+    const { userId } = req.params
+    // check existence
+    const userExist = await User.findById(userId) // {}, null
+    if (!userExist) {
+        return next(new AppError(messages.user.notFound, 404))
+    }
+    // change email
+    userExist.email = email
+    // generate otp
+    const otp = generateOTP()
+    // update user otp
+    userExist.otp = otp;
+    userExist.expireDateOtp = Date.now() + 15 * 60 * 1000; // OTP valid for 15 minutes
+    // save to db
+    const updatedEmail = await userExist.save() //{}, null
+    if (!updatedEmail) {
+        return next(new AppError(messages.user.failToUpdate, 500))
+    }
+    //send email
+    await sendEmail({
+        to: email,
+        subject: "Edit Email",
+        html: `<h1>request for edit email your otp is ${otp} </h1>`
+    });
+    // send response
+    return res.status(200).json({ message: 'OTP sent to email' });
+
 }
 
 
