@@ -35,7 +35,8 @@ export const generalFields = {
     )
   ),
   cPassword: joi.string().valid(joi.ref("newPassword")),
-  about: joi.string()
+  about: joi.string(),
+  newEmail: joi.string().email(),
 
 };
 
