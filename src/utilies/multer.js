@@ -5,13 +5,12 @@ import multer, { diskStorage } from "multer";
 import { nanoid } from 'nanoid';
 import { AppError } from './appError.js';
 
-// file validation
-// export const fileValidation = {
-//     file: ['application/ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']
-// }
+export const fileValidation = {
+    image: ['image/png', 'image/jpeg', 'image/jpg'],
+}
 
 // fileUpload
-export const fileUploads = ({folder, allowType = {}}) => {
+export const fileUploads = ({folder, allowType = fileValidation.image}) => {
     const storage = diskStorage({
         destination: (req, file, cb) => {
             const fullPath = path.resolve(`uploads/${folder}`)

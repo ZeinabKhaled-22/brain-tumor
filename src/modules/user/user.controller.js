@@ -5,6 +5,7 @@ import { sendEmail } from "../../utilies/sendEmail.js"
 import { User } from "../../../db/index.js"
 import { AppError } from "../../utilies/appError.js"
 import { generateOTP } from "../../utilies/otp.js"
+import cloudinary from "../../utilies/cloud.js"
 
 
 //reset password
@@ -42,32 +43,47 @@ export const resetPassword = async (req, res, next) => {
  * }
  */
 
-// update account
-export const updateAccount = async (req, res, next) => {
+// edit profile
+export const editProfile = async (req,res,next) => {
     // get data from req
-    const { firstName, lastName, phone } = req.body
+    const { firstName, about } = req.body
     const { userId } = req.params
-    // check existense
+    //check user existence
     const userExist = await User.findById(userId) //{}, null
-    if (!userExist) {
+    if(!userExist){
         return next(new AppError(messages.user.notFound, 404))
     }
-    // prepare data
-    userExist.firstName = firstName
-    userExist.lastName = lastName
-    userExist.phone = phone
-    // save to db
-    const updatedAccount = await userExist.save() //{},null
-    if (!updatedAccount) {
+    //edit first name
+    if(firstName){
+        return userExist.firstName = firstName
+    }
+    // edit about
+    if(about){
+        return userExist.about = about
+    }
+    // edit image
+    if(req.file){
+        const { secure_url, public_id } = await cloudinary.uploader.upload(req.file.path, {
+            public_id: userExist.image.public_id
+        })
+        userExist.image = { secure_url, public_id }
+        req.failImage = { secure_url, public_id }
+    }
+    // add to db
+    const updatedProfile = await userExist.save() //{}, null
+    if(!updatedProfile){
         return next(new AppError(messages.user.failToUpdate, 500))
     }
-    // send respone
+    // send response
     return res.status(200).json({
-        message: messages.user.updatedSucessfully,
+        message: messages.user.updatedSucessfully, 
         success: true,
-        data: updatedAccount
+        data: updatedProfile
     })
+
+
 }
+
 
 
 

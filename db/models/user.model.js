@@ -41,6 +41,10 @@ const userSchema = new Schema(
     },
     otp:Number,
     expireDateOtp:Date,
+    image:{
+      type: Object
+    },
+    about: String
   },
   { timestamps: true }
 );

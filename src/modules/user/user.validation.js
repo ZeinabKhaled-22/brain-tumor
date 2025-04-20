@@ -6,3 +6,9 @@ import { generalFields } from '../../middleware/validation.js'
 export const resetPasswordVal = joi.object({
   confirmPassword: generalFields.confirmPassword.required()
 })
+
+// edit profile
+export const editProfileVal = joi.object({
+  firstName: generalFields.firstName,
+  about: generalFields.about
+})

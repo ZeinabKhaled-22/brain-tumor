@@ -3,8 +3,9 @@ import { Router } from "express";
 import { deleteAccount, resetPassword, updateAccount, } from "./user.controller.js";
 import { asyncHandler } from "../../middleware/asyncHandler.js";
 import { isAuthenticated } from "../../middleware/authentication.js";
+import { cloudUploads } from "../../utilies/multer_cloud.js";
 import { isValid } from "../../middleware/validation.js";
-import { resetPasswordVal } from "./user.validation.js";
+import { editProfile, editProfileVal } from "./user.validation.js";
 
 // router
 const userRouter= Router()
@@ -12,19 +13,11 @@ const userRouter= Router()
 // reset passsword
 userRouter.put('/reset-password', isAuthenticated(), asyncHandler(resetPassword))
 
-// update account
-userRouter.put(
-  "/:userId",
-  isAuthenticated(),
-  asyncHandler(updateAccount)
-);
+// edit profile
+userRouter.put("/:userId", isAuthenticated(), cloudUploads().single('image'),isValid(editProfileVal),asyncHandler(editProfile));
 
 // delete account
-userRouter.delete(
-  "/:userId",
-  isAuthenticated(),
-  asyncHandler(deleteAccount)
-);
+userRouter.delete("/:userId",isAuthenticated(),asyncHandler(deleteAccount));
 
 
 

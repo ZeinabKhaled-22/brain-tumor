@@ -12,7 +12,7 @@ const generateMessages = (entity) => ({
 export const messages = {
   user: {
     ...generateMessages("user"),
-    verified: "user verify successfully ",
+    verified: "user verify successfully",
     invalidCredentials: "invalid credentials",
   },
   userData: generateMessages('userData')

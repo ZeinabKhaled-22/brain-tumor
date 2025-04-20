@@ -34,7 +34,8 @@ export const generalFields = {
       /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*_]).{8,}$/
     )
   ),
-  cPassword: joi.string().valid(joi.ref("newPassword"))
+  cPassword: joi.string().valid(joi.ref("newPassword")),
+  about: joi.string()
 
 };
 
