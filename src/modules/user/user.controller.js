@@ -117,7 +117,7 @@ export const changeEmail = async (req, res, next) => {
         html: `<h1>request for edit email your otp is ${otp} </h1>`
     });
     // send response
-    return res.status(200).json({ message: 'OTP sent to email' });
+    return res.status(200).json({ message: 'OTP sent to email', success: true});
 
 }
 
