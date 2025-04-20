@@ -25,7 +25,9 @@ userRouter.put("/:userId",
 userRouter.delete("/:userId", isAuthenticated(), asyncHandler(deleteAccount));
 
 // edit email
-userRouter.put('/:userId', isAuthenticated(),isValid(changeEmailVal), asyncHandler(changeEmail))
+userRouter.put('/:userId', isAuthenticated(), asyncHandler(changeEmail))
+
+// isValid(changeEmailVal)
 
 
 
