@@ -8,16 +8,21 @@ import { isValid } from "../../middleware/validation.js";
 import { editProfileVal } from "./user.validation.js";
 
 // router
-const userRouter= Router()
+const userRouter = Router()
 
 // reset passsword
 userRouter.put('/reset-password', isAuthenticated(), asyncHandler(resetPassword))
 
 // edit profile
-userRouter.put("/:userId", isAuthenticated(), cloudUploads().single('image'),isValid(editProfileVal),asyncHandler(editProfile));
+userRouter.put("/:userId",
+  isAuthenticated(),
+  cloudUploads().single('image'),
+  isValid(editProfileVal),
+  asyncHandler(editProfile)
+);
 
 // delete account
-userRouter.delete("/:userId",isAuthenticated(),asyncHandler(deleteAccount));
+userRouter.delete("/:userId", isAuthenticated(), asyncHandler(deleteAccount));
 
 
 
