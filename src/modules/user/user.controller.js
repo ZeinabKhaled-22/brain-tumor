@@ -91,7 +91,7 @@ export const deleteAccount = async (req, res, next) => {
 // change email
 export const changeEmail = async (req, res, next) => {
     // get data from req
-    const { email } = req.body
+    const { newEmail } = req.body
     const { userId } = req.params
     // check existence
     const userExist = await User.findById(userId) // {}, null
@@ -99,7 +99,7 @@ export const changeEmail = async (req, res, next) => {
         return next(new AppError(messages.user.notFound, 404))
     }
     // change email
-    userExist.email = email
+    userExist.email = newEmail
     // generate otp
     const otp = generateOTP()
     // update user otp
