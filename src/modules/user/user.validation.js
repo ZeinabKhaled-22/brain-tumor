@@ -20,5 +20,11 @@ export const changeEmailVal = joi.object({
 
 // change phone
 export const changePhoneVal = joi.object({
-  phone: generalFields.phone.required()
+ body: joi.object({
+  oldPhone:generalFields.phone.required(),
+  newPhone: generalFields.phone.required()
+ }),
+ params: joi.object({
+  userId: joi.string().hex().length(24).required()
+ })
 })

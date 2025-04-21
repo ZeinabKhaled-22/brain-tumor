@@ -12,6 +12,7 @@ export const bootStrap = (app, express) => {
     app.use('/doctor', doctorRouter)
     app.use('/userData', userDataRouter)
     app.use('/news', newsRouter)
+    
 
     // globalErrorHandling
     app.all("/", (req, res, next) => {
