@@ -121,4 +121,82 @@ export const changeEmail = async (req, res, next) => {
 
 }
 
+// change phone
+// export const changePhone = async (req, res, next) => {
+//     // get data from req
+//     const { oldPhone ,newPhone } = req.body
+//     const { userId } = req.params
+//     // check existence
+//     const userExist = await User.findById(userId) // {}, null
+//     if (!userExist) {
+//         return next(new AppError(messages.user.notFound, 404))
+//     }
+//     // change phone
+//     userExist.phone = newPhone
+//     // generate otp
+//     const otp = generateOTP()
+//     // update user otp
+//     userExist.otp = otp;
+//     userExist.expireDateOtp = Date.now() + 15 * 60 * 1000; // OTP valid for 15 minutes
+//     // save to db
+//     const updatedPhone = await userExist.save() //{}, null
+//     if (!updatedPhone) {
+//         return next(new AppError(messages.user.failToUpdate, 500))
+//     }
+//     //send email
+//     await sendEmail({
+//         to: email,
+//         subject: "Edit Email",
+//         html: `<h1>request for edit email your otp is ${otp} </h1>`
+//     });
+//     // send response
+//     return res.status(200).json({ message: 'OTP sent to email', success: true});
+
+// }
+
+// change phone
+export const changePhone = async (req, res, next) => {
+    try {
+        const { oldPhone, newPhone } = req.body;
+        const { userId } = req.params;
+
+        // check user existence
+        const userExist = await User.findById(userId);
+        if (!userExist) {
+            return next(new AppError(messages.user.notFound, 404));
+        }
+
+        // check if old phone matches
+        if (userExist.phone !== oldPhone) {
+            return next(new AppError("Old phone number does not match.", 400));
+        }
+
+        // update phone number
+        userExist.phone = newPhone;
+
+        // generate and attach OTP
+        const otp = generateOTP();
+        userExist.otp = otp;
+        userExist.expireDateOtp = Date.now() + 15 * 60 * 1000; // 15 minutes
+
+        // save updated user
+        const updatedUser = await userExist.save();
+        if (!updatedUser) {
+            return next(new AppError(messages.user.failToUpdate, 500));
+        }
+
+        // send OTP to user's email
+        await sendEmail({
+            to: userExist.email,
+            subject: "Phone Number Change Verification",
+            html: <h1>Your OTP to verify phone number change is: ${otp}</h1>
+        });
+
+        // response
+        return res.status(200).json({ message: 'OTP sent to email', success: true });
+    } catch (err) {
+        return next(new AppError("Something went wrong", 500));
+    }
+};
+
 

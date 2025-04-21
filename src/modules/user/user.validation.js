@@ -17,3 +17,8 @@ export const editProfileVal = joi.object({
 export const changeEmailVal = joi.object({
   email: generalFields.email.required()
 })
+
+// change phone
+export const changePhoneVal = joi.object({
+  phone: generalFields.phone.required()
+})
