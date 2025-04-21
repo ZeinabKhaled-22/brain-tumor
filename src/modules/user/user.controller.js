@@ -189,7 +189,7 @@ export const changePhone = async (req, res, next) => {
         await sendEmail({
             to: userExist.email,
             subject: "Phone Number Change Verification",
-            html: <h1>Your OTP to verify phone number change is: ${otp}</h1>
+            html:`<h1>Your OTP to verify phone number change is: ${otp}</h1>`
         });
 
         // response
