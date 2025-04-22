@@ -4,6 +4,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import { connectDB } from './db/connection.js'
 import { bootStrap } from './src/bootStrap.js'
+import passport from 'passport'
 
 // create server
 const app = express()
