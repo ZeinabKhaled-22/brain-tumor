@@ -6,6 +6,8 @@ import { generateToken, verifyToken } from '../../utilies/token.js'
 import { sendEmail } from '../../utilies/sendEmail.js'
 import { status } from '../../utilies/constant/enums.js'
 import { generateOTP } from '../../utilies/otp.js'
+import { application } from 'express'
+import passport from 'passport'
 
 // signup
 export const signup = async (req, res, next) => {
@@ -150,4 +152,31 @@ export const changePassword = async (req, res, next) => {
     await User.updateOne({ _id: user._id }, { password: hashedPassword, $unset: { otp: "", expireDateOtp: "" } })
     // send response 
     return res.status(200).json({ message: "password updated successfully", success: true })
+}
+
+// sign with google
+export const signWithGoogle = (req,res,next) => {
+    return res.send('<a href="/auth/google">login with google</a>')
+}
+
+// verify google
+export const verifyGoogle = (req,res,next) => {
+    passport.authenticate("google", { scope: ["profile", "email"] })
+}
+
+// verify callback 
+export const verifyCallback = (req,res,next) => {
+    passport.authenticate('google', {failureRedirect: '/'})
+    res.redirect('/profile')
+}
+
+// get profile
+export const getProfile = (req,res,next) => {
+    res.send(`Welcome {req.user.displayName}`)
+}
+
+// logout
+export const logout = (req,res,next) => {
+    req.logOut()
+    res.resdirect('/')
 }
