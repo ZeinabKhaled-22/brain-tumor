@@ -10,7 +10,8 @@ export const resetPasswordVal = joi.object({
 // edit profile
 export const editProfileVal = joi.object({
   firstName: generalFields.firstName,
-  about: generalFields.about
+  about: generalFields.about,
+  userId: generalFields.objectId.required()
 })
 
 // change email
@@ -20,11 +21,7 @@ export const changeEmailVal = joi.object({
 
 // change phone
 export const changePhoneVal = joi.object({
- body: joi.object({
-  oldPhone:generalFields.phone.required(),
-  newPhone: generalFields.phone.required()
- }),
- params: joi.object({
-  userId: joi.string().hex().length(24).required()
- })
+  oldPhone: generalFields.phone.required(),
+  newPhone: generalFields.phone.required(),
+  userId: generalFields.objectId.required()
 })

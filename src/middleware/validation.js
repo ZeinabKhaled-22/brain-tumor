@@ -21,19 +21,19 @@ export const generalFields = {
   role: joi.string(),
   gender: joi.string(),
   dateOfBirth: joi.date(),
-  bodyMeasurement:  joi.number(),
+  bodyMeasurement: joi.number(),
   height: joi.number(),
   width: joi.number(),
   healthCondition: joi.string(),
   country: joi.string(),
   otp: joi.string(),
   newPassword: joi
-  .string()
-  .pattern(
-    new RegExp(
-      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*_]).{8,}$/
-    )
-  ),
+    .string()
+    .pattern(
+      new RegExp(
+        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*_]).{8,}$/
+      )
+    ),
   cPassword: joi.string().valid(joi.ref("newPassword")),
   about: joi.string(),
   newEmail: joi.string().email(),
@@ -43,7 +43,7 @@ export const generalFields = {
 // validation
 export const isValid = (schema) => {
   return (req, res, next) => {
-    let data = req.body;
+    let data = { ...req.body, ...req.params, ...req.query };
     const { error } = schema.validate(data, { abortEarly: false });
     if (error) {
       let errArr = [];

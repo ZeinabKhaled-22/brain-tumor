@@ -47,16 +47,16 @@ export const editProfile = async (req, res, next) => {
     }
     //edit first name
     if (firstName) {
-        return userExist.firstName = firstName
+        userExist.firstName = firstName
     }
     // edit about
     if (about) {
-        return userExist.about = about
+        userExist.about = about
     }
     // edit image
     if (req.file) {
         const { secure_url, public_id } = await cloudinary.uploader.upload(req.file.path, {
-            public_id: userExist.image.public_id
+            public_id: userExist.image?.public_id
         })
         userExist.image = { secure_url, public_id }
         req.failImage = { secure_url, public_id }
@@ -117,42 +117,10 @@ export const changeEmail = async (req, res, next) => {
         html: `<h1>request for edit email your otp is ${otp} </h1>`
     });
     // send response
-    return res.status(200).json({ message: 'OTP sent to email', success: true});
+    return res.status(200).json({ message: 'OTP sent to email', success: true });
 
 }
 
-// change phone
-// export const changePhone = async (req, res, next) => {
-//     // get data from req
-//     const { oldPhone ,newPhone } = req.body
-//     const { userId } = req.params
-//     // check existence
-//     const userExist = await User.findById(userId) // {}, null
-//     if (!userExist) {
-//         return next(new AppError(messages.user.notFound, 404))
-//     }
-//     // change phone
-//     userExist.phone = newPhone
-//     // generate otp
-//     const otp = generateOTP()
-//     // update user otp
-//     userExist.otp = otp;
-//     userExist.expireDateOtp = Date.now() + 15 * 60 * 1000; // OTP valid for 15 minutes
-//     // save to db
-//     const updatedPhone = await userExist.save() //{}, null
-//     if (!updatedPhone) {
-//         return next(new AppError(messages.user.failToUpdate, 500))
-//     }
-//     //send email
-//     await sendEmail({
-//         to: email,
-//         subject: "Edit Email",
-//         html: `<h1>request for edit email your otp is ${otp} </h1>`
-//     });
-//     // send response
-//     return res.status(200).json({ message: 'OTP sent to email', success: true});
-
-// }
 
 // change phone
 export const changePhone = async (req, res, next) => {
@@ -189,7 +157,7 @@ export const changePhone = async (req, res, next) => {
         await sendEmail({
             to: userExist.email,
             subject: "Phone Number Change Verification",
-            html:`<h1>Your OTP to verify phone number change is: ${otp}</h1>`
+            html: `<h1>Your OTP to verify phone number change is: ${otp}</h1>`
         });
 
         // response
