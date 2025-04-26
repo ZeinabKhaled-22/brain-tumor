@@ -40,3 +40,21 @@ export const addHistroy = async (req, res, next) => {
         data: createdHistroy
     })
 }
+
+// get all histroies
+export const getAllHistroy = async (req, res, next) => {
+    // get histroies
+    const getHistories = await Histroy.find()
+    // response
+    return res.status(200).json({ success: true, data: getHistories})
+}
+
+// delete histories
+export const deleteHistory = async (req, res, next) => {
+    // get data from req
+    const { histroyId } = req.params
+    // delete history
+    const deletedHistory = await Histroy.deleteOne({ _id: histroyId })
+    // return response
+    return res.status(200).json({ message: messages.histroy.deletedSuccessfully, success: true})
+}
