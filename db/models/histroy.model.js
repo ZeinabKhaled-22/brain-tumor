@@ -19,7 +19,7 @@ const histroySchema = new Schema({
         type: Number,
         required: true
     },
-    date: Date,
+    date: String,
     scanName: {
         type: String,
         required: true,
