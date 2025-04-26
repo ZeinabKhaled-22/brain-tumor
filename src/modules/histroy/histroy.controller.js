@@ -9,19 +9,15 @@ export const addHistroy = async (req, res, next) => {
     // get data from req
     const { prediction, predictedType, confidence, scanName, user } = req.body
     // check existence
-    const userExist = await User.findById( user ) //{}, null
+    const userExist = await User.findById(user) //{}, null
     if (!userExist) {
-        return next( new AppError(messages.user.notFound, 404))
-    }
-    const histroyExist = await Histroy.findOne({ scanName }) //{}, null
-    if(histroyExist){
-        return next( new AppError(messages.histroy.alreadyExist, 409))
+        return next(new AppError(messages.user.notFound, 404))
     }
     // upload image
-    const { secure_url, public_id } = await cloudinary.uploader.upload(req.file.path, {
-        public_id: histroyExist.image?.public_id
+    const { secure_url, public_id } = await cloudinary.uploader.upload(req.file.path,{
+        public_id: Histroy.image?.path
     })
-    histroyExist.image = { secure_url, public_id }
+    Histroy.image = { secure_url, public_id }
     req.failImage = { secure_url, public_id }
     // prepare data
     const histroy = new Histroy({
@@ -29,12 +25,12 @@ export const addHistroy = async (req, res, next) => {
         predictedType,
         confidence,
         scanName,
-        image,
+        image: { secure_url, public_id } ,
         user
     })
     // add to db
     const createdHistroy = await histroy.save() // {}, null
-    if(!createdHistroy){
+    if (!createdHistroy) {
         return next(new AppError(messages.histroy.failToCreate, 500))
     }
     // send response
