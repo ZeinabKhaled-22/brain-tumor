@@ -15,5 +15,6 @@ export const messages = {
     verified: "user verify successfully",
     invalidCredentials: "invalid credentials",
   },
-  userData: generateMessages('userData')
+  userData: generateMessages('userData'),
+  histroy: generateMessages('histroy')
 };

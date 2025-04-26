@@ -153,30 +153,3 @@ export const changePassword = async (req, res, next) => {
     // send response 
     return res.status(200).json({ message: "password updated successfully", success: true })
 }
-
-// sign with google
-export const signWithGoogle = (req,res,next) => {
-    return res.send('<a href="/auth/google">login with google</a>')
-}
-
-// verify google
-export const verifyGoogle = (req,res,next) => {
-    passport.authenticate("google", { scope: ["profile", "email"] })
-}
-
-// verify callback 
-export const verifyCallback = (req,res,next) => {
-    passport.authenticate('google', {failureRedirect: '/'})
-    res.redirect('/profile')
-}
-
-// get profile
-export const getProfile = (req,res,next) => {
-    res.send(`Welcome {req.user.displayName}`)
-}
-
-// logout
-export const logout = (req,res,next) => {
-    req.logOut()
-    res.resdirect('/')
-}

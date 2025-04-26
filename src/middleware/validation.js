@@ -36,7 +36,11 @@ export const generalFields = {
     ),
   cPassword: joi.string().valid(joi.ref("newPassword")),
   about: joi.string(),
-  newEmail: joi.string().email(),
+  prediction: joi.string(),
+  predictedType: joi.string(),
+  confidence: joi.number(),
+  date: joi.date(),
+  scanName: joi.string()
 
 };
 
