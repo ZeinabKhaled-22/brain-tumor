@@ -17,7 +17,7 @@ histroyRouter.post('/addHistroy', isAuthenticated(),cloudUploads().single('image
 histroyRouter.get('/getAllHistories', asyncHandler(getAllHistroy))
 
 // delete history
-histroyRouter.delete('/:historyId',isAuthenticated(), asyncHandler(deleteHistory))
+histroyRouter.delete('/:histroyId', isAuthenticated(), asyncHandler(deleteHistory))
 
 
 
