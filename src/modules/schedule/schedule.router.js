@@ -11,7 +11,8 @@ const scheduleRouter =  Router()
 scheduleRouter.post('/:doctorId', isAuthenticated(), asyncHandler(addToSchedule) )
 
 // get schedule
-scheduleRouter.get('/getAllSchedule', asyncHandler(getAllSchedule))
+scheduleRouter.get('/my-schedule', isAuthenticated(), asyncHandler(getAllSchedule));
+// scheduleRouter.get('/getAllSchedule', asyncHandler(getAllSchedule))
 
 
 // delete schedule
