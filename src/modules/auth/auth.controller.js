@@ -111,7 +111,7 @@ export const forgetPassword = async (req, res, next) => {
     //send email
     await sendEmail({ to: email, subject: "forget password", html: `<h1>u request forget password your otp is ${otp} </h1>` });
     // send response
-    return res.status(200).json({ message: 'OTP sent to email' });
+    return res.status(200).json({ message: 'OTP sent to email', data: user.otp });
 }
 
 // change password

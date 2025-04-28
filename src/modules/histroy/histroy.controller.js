@@ -14,7 +14,7 @@ export const addHistroy = async (req, res, next) => {
         return next(new AppError(messages.user.notFound, 404))
     }
     // upload image
-    const { secure_url, public_id } = await cloudinary.uploader.upload(req.file.path,{
+    const { secure_url, public_id } = await cloudinary.uploader.upload(req.file.path, {
         public_id: Histroy.image?.path
     })
     Histroy.image = { secure_url, public_id }
@@ -25,7 +25,7 @@ export const addHistroy = async (req, res, next) => {
         predictedType,
         confidence,
         scanName,
-        image: { secure_url, public_id } ,
+        image: { secure_url, public_id },
         user
     })
     // add to db
@@ -46,7 +46,7 @@ export const getAllHistroy = async (req, res, next) => {
     // get histroies
     const getHistories = await Histroy.find()
     // response
-    return res.status(200).json({ success: true, data: getHistories})
+    return res.status(200).json({ success: true, data: getHistories })
 }
 
 // delete histories
@@ -56,5 +56,5 @@ export const deleteHistory = async (req, res, next) => {
     // delete history
     const deletedHistory = await Histroy.deleteOne({ _id: histroyId })
     // return response
-    return res.status(200).json({ message: messages.histroy.deletedSuccessfully, success: true})
+    return res.status(200).json({ message: messages.histroy.deletedSuccessfully, success: true })
 }
