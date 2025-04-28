@@ -2,7 +2,7 @@
 import { Router } from "express";
 import { isAuthenticated } from "../../middleware/authentication.js";
 import { asyncHandler } from "../../middleware/asyncHandler.js";
-import { addToSchedule, deleteSchedule, getAllSchedule, specificSchedule } from "./schedule.controller.js";
+import { addToSchedule, deleteSchedule, getAllSchedule } from "./schedule.controller.js";
 
 // Router
 const scheduleRouter =  Router()
@@ -18,8 +18,6 @@ scheduleRouter.get('/my-schedule', isAuthenticated(), asyncHandler(getAllSchedul
 // delete schedule
 scheduleRouter.delete('/:scheduleId', isAuthenticated(), asyncHandler(deleteSchedule))
 
-// specific
-scheduleRouter.post('/:scheduleId',isAuthenticated(),asyncHandler(specificSchedule))
 
 
 
