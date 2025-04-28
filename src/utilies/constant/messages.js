@@ -16,5 +16,6 @@ export const messages = {
     invalidCredentials: "invalid credentials",
   },
   userData: generateMessages('userData'),
-  histroy: generateMessages('histroy')
+  histroy: generateMessages('histroy'),
+  schedule: generateMessages('schedule')
 };

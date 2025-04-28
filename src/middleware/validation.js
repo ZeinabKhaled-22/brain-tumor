@@ -40,7 +40,8 @@ export const generalFields = {
   predictedType: joi.string(),
   confidence: joi.number(),
   date: joi.date(),
-  scanName: joi.string()
+  scanName: joi.string(),
+  idToken: joi.string()
 
 };
 

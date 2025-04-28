@@ -39,12 +39,16 @@ const userSchema = new Schema(
       default: status.PENDING
 
     },
-    otp:Number,
-    expireDateOtp:Date,
-    image:{
+    otp: Number,
+    expireDateOtp: Date,
+    image: {
       type: Object
     },
     about: String,
+    schedule: [{
+      type: Schema.Types.ObjectId,
+      ref: "Doctor"
+    }]
   },
   { timestamps: true }
 );

@@ -37,3 +37,8 @@ export const changePasswordVal = joi.object({
   newPassword: generalFields.newPassword.required(),
   confirmPassword: generalFields.cPassword.required()
 })
+
+// login with google
+export const loginWithGoogleVal = joi.object({
+  idToken: generalFields.idToken.required()
+})

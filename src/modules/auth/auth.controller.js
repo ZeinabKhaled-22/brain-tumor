@@ -6,9 +6,7 @@ import { generateToken, verifyToken } from '../../utilies/token.js'
 import { sendEmail } from '../../utilies/sendEmail.js'
 import { status } from '../../utilies/constant/enums.js'
 import { generateOTP } from '../../utilies/otp.js'
-import { application } from 'express'
-import passport from 'passport'
-
+import { OAuth2Client } from 'google-auth-library'
 // signup
 export const signup = async (req, res, next) => {
     // get data from req
@@ -119,7 +117,7 @@ export const changePassword = async (req, res, next) => {
     // get data from req
     const { email, otp, newPassword } = req.body
     //check email
-    const userExist =await User.findOne({email})
+    const userExist = await User.findOne({ email })
     // Find user by OTP
     const user = await User.findOne({ otp });
     if (!user) {
@@ -152,4 +150,36 @@ export const changePassword = async (req, res, next) => {
     await User.updateOne({ _id: user._id }, { password: hashedPassword, $unset: { otp: "", expireDateOtp: "" } })
     // send response 
     return res.status(200).json({ message: "password updated successfully", success: true })
+}
+
+// google login
+export const googleLogin = async (req, res, next) => {
+    // get data from req
+    const { idToken } = req.body
+    // check token with google
+    const { name, email } = await verifyGoogleToken(idToken)
+    // check email existence
+    const userExist = await User.findOne({ email }) // {}, null
+    if (!userExist) {
+        await User.create({ firstName: name, email })
+    }
+    // generate token
+    const token = generateToken({ payload: { _id: userExist._id, email } })
+    // send response
+    return res.status(200).json({
+        message: 'login successfully',
+        success: true,
+        token
+    })
+}
+
+// verify google token
+export const verifyGoogleToken = async (idToken) => {
+    const client = new OAuth2Client();
+    const ticket = await client.verifyIdToken({
+        idToken,
+        audience: process.env.CLIENT_ID
+    })
+    const payload = ticket.getPayload()
+    return payload
 }

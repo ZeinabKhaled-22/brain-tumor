@@ -1,5 +1,6 @@
+import cors from 'cors'
 import { globalErrorHandling } from "./middleware/asyncHandler.js"
-import { authRouter, doctorRouter, userDataRouter, userRouter, newsRouter, histroyRouter } from "./modules/index.js"
+import { authRouter, doctorRouter, userDataRouter, userRouter, newsRouter, histroyRouter, scheduleRouter } from "./modules/index.js"
 
 
 export const bootStrap = (app, express) => {
@@ -13,12 +14,15 @@ export const bootStrap = (app, express) => {
     app.use('/userData', userDataRouter)
     app.use('/news', newsRouter)
     app.use('/histroy', histroyRouter)
+    app.use('/schedule', scheduleRouter)
     
-
 
     // globalErrorHandling
     app.all("/", (req, res, next) => {
         return res.json({ message: "invalid url" })
     })
     app.use(globalErrorHandling)
+
+    // cors
+    app.use(cors("*"))
 }
