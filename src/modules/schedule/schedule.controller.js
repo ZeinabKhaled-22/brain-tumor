@@ -46,7 +46,7 @@ export const getAllSchedule = async (req, res, next) => {
     return res.status(200).json({
         success: true,
         // data: user.schedule
-        data: allSchedule.schedule
+        data: allSchedule
     })
     // const allSchedule = await User.find()
     // return res.status(200).json({ success: true, data: allSchedule })
