@@ -40,12 +40,13 @@ export const addToSchedule = async (req, res, next) => {
 
 // get all 
 export const getAllSchedule = async (req, res, next) => {
-    const userId = req.authUser?._id;
-    const user = await User.findById(userId).populate('schedule'); // populate from doctors collection
-
+    // const userId = req.authUser?._id;
+    // const user = await User.findById(userId).populate('schedule'); // populate from doctors collection
+    const allSchedule = await User.find().populate('schedule')
     return res.status(200).json({
         success: true,
-        data: user.schedule
+        // data: user.schedule
+        data: allSchedule.schedule
     })
     // const allSchedule = await User.find()
     // return res.status(200).json({ success: true, data: allSchedule })
