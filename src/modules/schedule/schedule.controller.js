@@ -53,6 +53,7 @@ export const getAllSchedule = async (req, res, next) => {
 }
 
 // delete Schedule
+
 export const deleteSchedule = async (req, res, next) => {
     const { scheduleId } = req.params
     const deletedSchedule = await User.deleteOne({ _id: scheduleId })
