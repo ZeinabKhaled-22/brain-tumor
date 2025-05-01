@@ -56,6 +56,6 @@ export const getAllSchedule = async (req, res, next) => {
 
 export const deleteSchedule = async (req, res, next) => {
     const { scheduleId } = req.params
-    const deletedSchedule = await User.deleteOne({ _id: scheduleId })
+    const deletedSchedule = await User.updateOne({ _id: req.authUser._id }, { $pull: { schedule: scheduleId } })
     return res.status(200).json({ message: messages.schedule.deletedSuccessfully, success: true })
 }
