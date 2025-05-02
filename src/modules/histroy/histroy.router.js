@@ -14,7 +14,7 @@ const histroyRouter = Router()
 histroyRouter.post('/addHistroy', isAuthenticated(),cloudUploads().single('image'), isValid(addHistroyVal), asyncHandler(addHistroy))
 
 // get all histroy
-histroyRouter.get('/getAllHistories', asyncHandler(getAllHistroy))
+histroyRouter.get('/getAllHistories',isAuthenticated(), asyncHandler(getAllHistroy))
 
 // delete history
 histroyRouter.delete('/:histroyId', isAuthenticated(), asyncHandler(deleteHistory))

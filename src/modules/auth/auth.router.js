@@ -3,7 +3,7 @@ import { Router } from "express";
 import { isValid } from "../../middleware/validation.js";
 import { changePasswordVal, forgetpassVal, loginWithGoogleVal, signupVal } from "./auth.validation.js";
 import { asyncHandler } from "../../middleware/asyncHandler.js";
-import { signup, verifyAccount, login, forgetPassword, changePassword } from "./auth.controller.js";
+import { signup, verifyAccount, login, forgetPassword, changePassword, googleLogin } from "./auth.controller.js";
 import { loginVal } from "./auth.validation.js";
 import { isAuthenticated } from "../../middleware/authentication.js";
 import { isAuthorized } from "../../middleware/authorization.js";
@@ -27,7 +27,7 @@ authRouter.post('/forget-password',isValid(forgetpassVal),asyncHandler(forgetPas
 authRouter.put('/change-password',isValid(changePasswordVal),asyncHandler(changePassword))
 
 // login with google
-authRouter.post('loginWithGoogle', isValid(loginWithGoogleVal), asyncHandler())
+authRouter.post('/loginWithGoogle', isValid(loginWithGoogleVal), asyncHandler(googleLogin))
 
 
 export default authRouter;

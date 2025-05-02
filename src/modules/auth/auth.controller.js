@@ -152,6 +152,17 @@ export const changePassword = async (req, res, next) => {
     return res.status(200).json({ message: "password updated successfully", success: true })
 }
 
+// verify google token
+export const verifyGoogleToken = async (idToken) => {
+    const client = new OAuth2Client();
+    const ticket = await client.verifyIdToken({
+        idToken,
+        audience: process.env.CLIENT_ID
+    })
+    const payload = ticket.getPayload()
+    return payload
+}
+
 // google login
 export const googleLogin = async (req, res, next) => {
     // get data from req
@@ -171,15 +182,4 @@ export const googleLogin = async (req, res, next) => {
         success: true,
         token
     })
-}
-
-// verify google token
-export const verifyGoogleToken = async (idToken) => {
-    const client = new OAuth2Client();
-    const ticket = await client.verifyIdToken({
-        idToken,
-        audience: process.env.CLIENT_ID
-    })
-    const payload = ticket.getPayload()
-    return payload
 }

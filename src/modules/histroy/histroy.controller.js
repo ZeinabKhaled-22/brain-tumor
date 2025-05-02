@@ -44,7 +44,7 @@ export const addHistroy = async (req, res, next) => {
 // get all histroies
 export const getAllHistroy = async (req, res, next) => {
     // get histroies
-    const getHistories = await Histroy.find()
+    const getHistories = await Histroy.find({ user: req.authUser._id })
     // response
     return res.status(200).json({ success: true, data: getHistories })
 }
