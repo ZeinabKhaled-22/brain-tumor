@@ -42,6 +42,8 @@ export const addToSchedule = async (req, res, next) => {
 export const getAllSchedule = async (req, res, next) => {
     // const { userId } = req.params
     const userId = req.authUser?._id;
+    console.log(userId);
+
     const user = await User.findById(userId).populate('schedule'); // populate from doctors collection
     // const allSchedule = await User.find().populate('schedule')
     return res.status(200).json({
@@ -57,6 +59,6 @@ export const getAllSchedule = async (req, res, next) => {
 
 export const deleteSchedule = async (req, res, next) => {
     const { scheduleId } = req.params
-    const deletedSchedule = await User.updateOne({ _id: req.authUser._id }, { $pull: { schedule: scheduleId } })
+    await User.updateOne({ _id: req.authUser._id }, { $pull: { schedule: scheduleId } })
     return res.status(200).json({ message: messages.schedule.deletedSuccessfully, success: true })
 }
